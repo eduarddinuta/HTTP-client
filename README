@@ -1,0 +1,41 @@
+Dinuta Eduard Stefan 321CA
+Tema 3 PCOM
+
+    Tema implementeaza un client http in C++ care trimite cereri catre un server
+care actioneaza asemenea unei biblioteci in care utilizatorul poate stoca,
+sterge si vizualiza carti. Pentru trimiterea datelor unei comenzi catre
+server in format json am folosit biblioteca nlohmann. Pentru a asigura pastrarea
+conexiunii cu serverul, aceasta va fii deschisa doar inainte de trimiterea unei
+cereri si inchisa imediat dupa. In cazul in care conexiunea nu se poate realiza,
+userul va fii informat ca trebuie sa incerce din nou.
+    Primele comenzi care trebuie trimise sunt login sau register. In cazul
+unei alte comenzi inaintea acestora userul va primi un mesaj ca trebuie mai 
+intai sa se logheze. Se verifica username-ul si parola pentru a nu avea spatii
+si in cazul in care totul este corect se trimite cererea catre server. Dupa un
+register trebuie trimis si un login, utilizatorul nefiind logat automat.
+    Dupa login serverul va raspunde cu un cookie ce va fi pastrat pentru a 
+realiza actiuni viitoare in aceasta sesiune a utilizatorului. Pentru urmatoarele
+comenzi utilizatorul trebuie sa primeasca acces in biblioteca prin comanda
+enter_library. O comanda de lucru cu cartile va primi eroare fara intrarea in
+biblioteca.
+    Dupa comanda enter_library, serverul va raspunde cu un token ce va fii
+pastrat si trimis la urmatoarele cereri ale userului pentru a valida accesul
+acestuia la biblioteca. In acest moment utilizatorul poate:
+- sa vada o lista cu toate cartile sale si informatii sumare despre acestea
+(doar id-ul si titlul)
+- sa vada detalii despre o carte, introducand id-ul acesteia. Se verifica
+id-ul sa fie un numar. Daca acea carte exista se vor afisa id-ul titlul,
+autorul, publisherul, genul si numarul de pagini.
+- sa adauge o carte. Utilizatorului ii va fii cerut sa introduca titlul,
+autorul, publisherul, genul si numarul de pagini al cartii. Se verifica
+numarul de pagini sa fie un numar.
+- sa stearga o carte. Utilizatorului ii va fii cerut din nou sa introduca un
+id, care trebuie sa fie un numar. Daca acea carte exista se va sterge din 
+biblioteca sa.
+    Alte doua comenzi suportate de client sunt logout, caz in care cookieul
+si tokenul curent sunt invalidate, iar operatiile de login si enter_library
+trebuie realizate din nou pentru a putea face alte cereri, si exit, care
+inchide conexiunea si opreste clientul.
+    Pentru trimiterea cererilor sunt folosite functiile de constructie ale
+acestora din scheletul de laborator, la care a fost adaugata si o functie
+pentru cererea de DELETE.
